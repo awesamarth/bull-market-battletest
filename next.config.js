@@ -5,6 +5,9 @@ const nextConfig = {
       config.externals.push('pino-pretty', 'lokijs', 'encoding');
       return config;
     },
-  };
+    experimental: {
+      missingSuspenseWithCSRBailout: false,
+    },
+  };  
   
   module.exports = nextConfig;
