@@ -8,8 +8,11 @@ export default function Woohoo(){
   const searchParams = useSearchParams()
 
   const explanations: { [key: string]: string } = {
-    "1": "Great work! Never give out your private key. EVER.",
-    "2": "One of the most commons scams out there. Nice work!"
+    1: "Great work! Never give out your private key. EVER.",
+    2: "One of the most commons scams out there. Nice work not falling for it!",
+    3: "Imagine carrying your entire net worth around your neck lmao. Couldn't be you, huh? Great work.",
+    4: "They fill their bags with yours and you know it. Awesome work!"
+
 };  
 
     const level = (searchParams.get('level'))

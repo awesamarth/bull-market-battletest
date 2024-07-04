@@ -69,6 +69,8 @@ export default function Home() {
         router.push("/woohoo?level=2")
       }
 
+      if(answer==="Sure") return
+
       setTimeout(() => {
 
         setMessages((prevMessages) => [

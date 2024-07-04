@@ -30,7 +30,7 @@ export default function Home() {
       console.log("hua")
       start()
     }
-  }, [address])
+  }, [address, clicked])
 
   const start = async()=>{
     setLoading(true)
@@ -76,6 +76,7 @@ export default function Home() {
       
       
     }
+    console.log("is it clicked ", clicked)
     if (address&&clicked){
       console.log("start crow bosh");
       try {
