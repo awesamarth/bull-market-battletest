@@ -21,9 +21,12 @@ export async function POST(req: NextRequest, res: NextResponse) {
         level: 0,
       },
     });
+
+    return Response.json({level:0})
   }
 
-  const response = Response.json({ result: "done" });
+  else{
+    return Response.json({level:user.level})
+  }
 
-  return response;
 }

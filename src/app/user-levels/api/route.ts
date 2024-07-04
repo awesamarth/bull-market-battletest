@@ -33,3 +33,29 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
   return response;
 }
+
+export async function GET(req: NextRequest, res: NextResponse) {
+    const request = await req.json();
+    console.log("get request hai bosh")
+    const level = request.level;
+    const address = request.walletAddress
+  
+    console.log(level)
+    console.log(address)
+  
+    const user = await prisma.user.findUnique({
+      where: {
+        walletAddress: address,
+      },
+    });
+    
+    if(user!.level<level-1){
+        return Response.json({result:0});
+
+    }
+    else{
+        return Response.json({result:1});
+    }
+
+  
+  }

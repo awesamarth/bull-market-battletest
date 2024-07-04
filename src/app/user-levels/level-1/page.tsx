@@ -9,6 +9,7 @@ import { http, createPublicClient, createWalletClient } from "viem";
 import { sepolia } from "viem/chains";
 import { privateKeyToAccount } from "viem/accounts";
 import { useRouter } from "next/navigation";
+import { callApi } from "@/app/utils/functions";
 
 export const bit = Press_Start_2P({ subsets: ["latin"], weight: ["400"] });
 
@@ -18,31 +19,14 @@ const publicClient = createPublicClient({
 });
 export default function Level1() {
   const [privateKey, setPrivateKey] = useState("");
+  const [isLoading, setIsLoading] = useState(false)
+  
   const router = useRouter();
   const {address} = useAccount()
 
-  const callApi = async()=>{
-    try {
-      const response = await fetch("/user-levels/api", {
-        method: "POST",
-        body: JSON.stringify({level:1, walletAddress:address})
-      });
-
-      if (response.ok) {
-        console.log("call successful");
-      } else {
-        console.error("Failed");
-
-      }
-    } catch (error) {
-      console.log(address)
-      console.log({level:1, walletAddress:address})
-      console.error("Error occurred during API call:", error);
-
-    }
-  }
 
   const check = async () => {
+    setIsLoading(true)
     try {
       const account = privateKeyToAccount(`0x${privateKey}`);
 
@@ -54,15 +38,16 @@ export default function Level1() {
         router.push("/pwned?level=1")
       } else {
         console.log("correct hai bosh");
-        callApi()
+        callApi(address, 1)        
         router.push("/woohoo?level=1")
 
       }
     } catch (error) {
-      callApi()
+      callApi(address, 1)
       router.push("/woohoo?level=1")
 
     }
+    setIsLoading(false)
   };
 
   return (
