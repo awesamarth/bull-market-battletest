@@ -2,7 +2,8 @@
 
 import { Input } from "@/components/ui/input";
 import { addRequestMeta } from "next/dist/server/request-meta";
-import { Press_Start_2P } from "next/font/google";
+import { bit } from "@/app/utils/utils";
+
 import { useState } from "react";
 import { useAccount, useBalance } from "wagmi";
 import { http, createPublicClient, createWalletClient } from "viem";
@@ -11,7 +12,6 @@ import { privateKeyToAccount } from "viem/accounts";
 import { useRouter } from "next/navigation";
 import { callApi } from "@/app/utils/functions";
 
-export const bit = Press_Start_2P({ subsets: ["latin"], weight: ["400"] });
 
 const publicClient = createPublicClient({
   chain: sepolia,

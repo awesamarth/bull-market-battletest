@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { bit } from "../../level-1/page";
+import { bit } from "@/app/utils/utils";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { callApi } from "@/app/utils/functions";

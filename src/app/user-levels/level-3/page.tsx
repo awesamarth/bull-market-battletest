@@ -1,7 +1,7 @@
 'use client'
 
 import { FormEvent } from "react";
-import { bit } from "../level-1/page";
+import { bit } from "@/app/utils/utils";
 import { useRouter } from "next/navigation";
 import { useAccount } from "wagmi";
 import { callApi } from "@/app/utils/functions";

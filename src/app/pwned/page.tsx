@@ -1,6 +1,6 @@
 'use client'
 import Image from "next/image";
-import { bit } from "../user-levels/level-1/page";
+import { bit } from "@/app/utils/utils";
 import { useSearchParams } from "next/navigation";
 
 export default function Pwned(){
