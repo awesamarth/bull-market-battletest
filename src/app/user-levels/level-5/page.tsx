@@ -1,13 +1,26 @@
+'use client'
+import Loader from "@/components/Loader";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function Email() {
+  const [isLoading, setIsLoading] = useState(false)
+
+  const block = ()=>{
+    setIsLoading(true)
+    router.push("/woohoo?level=5")
+
+  }
+
+  const router = useRouter()
   return (
     <div className="bg-purple-300 h-screen">
       {/* Navbar */}
       <div className="pt-16">
-        <header className="bg-purple-300 flex justify-between py-3 items-center px-4 sticky top-0  z-50">
+        <header className="bg-purple-300 flex justify-between py-2 items-center px-4 sticky top-0  z-50">
           <div className="flex gap-2 items-center">
             <Image
               className=""
@@ -50,15 +63,18 @@ export default function Email() {
         <div className="bg-gray-100  ml-[17rem] h-[35rem] flex flex-col rounded-md  w-[68rem] ">
           <div className="w-full h-10 px-4  pt-2 flex items-center justify-between ">
             <button className="rounded-full border h-7 w-7 flex justify-center  border-gray-500">←</button>
-            <button className="w-24 flex justify-center border rounded-xl border-gray-500 cursor:pointer">Block</button>
+            <button onClick={block} className="w-24 h-9 items-center flex justify-center border rounded-xl hover:bg-gray-200 border-gray-500 cursor:pointer">
+              {isLoading?<Loader />:"Block"}
+              
+              </button>
           </div>
 
           <div className="pl-5 pt-4 flex flex-col">
-            <div className="text-3xl">Claim your gkSync Airdrop now!</div>
+            <div className="text-3xl pt-1">Claim your gkSync Airdrop now!</div>
             <div className=" text-sm pl-1 pt-1">gknation <span className="text-gray-400">{" <gknation@aerdrop.io>"}</span></div>
             <div className="pl-1 mt-5 text-lg">Congratulations "address"! The wait is finaly over.  You are eligible for our highly antecipated airdrop! Follow the link below and claim what's yours! You may have received this mail in your spam folder but no worry, everything is all right</div>
             <Image className="self-center rounded-md mt-4 invert " src="/zksyncdrop.png" height={300} width={550} alt="zksync airdrop" />
-            <Link href="/user-levels/level-5/airdrop" className="pl-1 mt-2 self-center">Claim here!</Link>
+            <Link href="/user-levels/level-5/airdrop" className="pl-1 mt-2 self-center text-yellow-600">Claim here!</Link>
           </div>
 
         </div>

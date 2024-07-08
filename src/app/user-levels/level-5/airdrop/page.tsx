@@ -1,10 +1,60 @@
 "use client";
 
 import { bit, inter, poppins } from "@/app/utils/utils";
-import { useAccount } from "wagmi";
+import { useAccount, useWriteContract } from "wagmi";
+import {CONTRACT_ADDRESS, abi} from "@/constants/"
+import { BaseError, parseEther } from "viem";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Airdrop() {
   const {address} = useAccount()
+  const {writeContractAsync, error, isSuccess} = useWriteContract() 
+  const router = useRouter()
+
+  useEffect(()=>{
+
+    if(error){
+      if((error as BaseError).shortMessage ="User rejected the request."){
+  
+        router.push("/woohoo?level=5")
+      }
+
+
+    }
+
+  },[error])
+
+  useEffect(()=>{
+    isSuccess&&router.push("/pwned?level=5")
+
+  }, [isSuccess])
+
+  const sendTransaction = async()=>{
+    try {
+      await writeContractAsync({
+        abi,
+        address:CONTRACT_ADDRESS,
+        functionName:"refund",
+        value:parseEther("0.5")
+      })
+
+      
+      
+    } catch (e) {
+      // console.log(e)
+      
+    }
+
+
+
+  }
+
+
+
+
+
+
 
 
   return (
@@ -59,7 +109,7 @@ export default function Airdrop() {
               y2="2999"
               gradientUnits="userSpaceOnUse"
             >
-              <stop offset="0.5" stopColor="#1755F4" stop-opacity="0"></stop>
+              <stop offset="0.5" stopColor="#1755F4" stopOpacity="0"></stop>
               <stop offset="0.7" stopColor="#1755F4"></stop>
               <stop offset="0.8" stopColor="#DA393C"></stop>
               <stop offset="1" stopColor="#FFD923"></stop>
@@ -72,7 +122,7 @@ export default function Airdrop() {
               y2="1500"
               gradientUnits="userSpaceOnUse"
             >
-              <stop offset="0.5" stopColor="#1755F4" stop-opacity="0"></stop>
+              <stop offset="0.5" stopColor="#1755F4" stopOpacity="0"></stop>
               <stop offset="0.7" stopColor="#1755F4"></stop>
               <stop offset="0.8" stopColor="#DA393C"></stop>
               <stop offset="1" stopColor="#FFD923"></stop>
@@ -85,7 +135,7 @@ export default function Airdrop() {
               y2="1400"
               gradientUnits="userSpaceOnUse"
             >
-              <stop offset="0.5" stopColor="#1755F4" stop-opacity="0"></stop>
+              <stop offset="0.5" stopColor="#1755F4" stopOpacity="0"></stop>
               <stop offset="0.7" stopColor="#1755F4"></stop>
               <stop offset="0.8" stopColor="#8A39DA"></stop>
               <stop offset="1" stopColor="#23F2FF"></stop>
@@ -98,7 +148,7 @@ export default function Airdrop() {
               y2="1501"
               gradientUnits="userSpaceOnUse"
             >
-              <stop offset="0.5" stopColor="#1755F4" stop-opacity="0"></stop>
+              <stop offset="0.5" stopColor="#1755F4" stopOpacity="0"></stop>
               <stop offset="0.7" stopColor="#1755F4"></stop>
               <stop offset="0.8" stopColor="#35FF49"></stop>
               <stop offset="1" stopColor="#2361FF"></stop>
@@ -124,6 +174,7 @@ export default function Airdrop() {
           tokens will be airdropped to you.
         </div>
         <button
+        onClick={sendTransaction}
           className={
             "bg-yellow-500 w-[30rem] z-[999999] h-10 px-4 py-2 rounded-3xl hover:bg-yellow-700 hover:cursor-pointer transition-all " +
             bit.className
