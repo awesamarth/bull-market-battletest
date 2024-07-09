@@ -109,9 +109,9 @@ export default function Home() {
       <div className=""></div>
       <div className=" flex flex-col gap-8 text-center">
         <div className={"text-6xl "+poppins.className}>Welcome to Bull Market Battletest</div>
-        <div className="text-2xl">
+        <div className="text-2xl border-2 w-[50rem] self-center">
           Are you truly prepared for the bull run? Can you wade through <br />
-          the mire of scams and keep your funds safe?{" "}
+          the mire of scams and keep your funds safe? Solve all riddles without compromising your account and prove your mettle!
         </div>
         <div className="flex justify-center ">
           {" "}

@@ -13,7 +13,9 @@ export default function Woohoo(){
     3: "Imagine carrying your entire net worth around your neck lmao. Couldn't be you, huh? Great work.",
     4: "They fill their bags with yours and you know it. Awesome work!",
     5: "Fishing for airdrops is fine, getting phished for airdrops isn't. Nice work!  ",
-    6: "They tried pulling a sneaky on ya. Good work dodging it!"
+    6: "They tried pulling a sneaky on ya. Good work dodging it!",
+    7: "That wasn't your friendly neighbourhood fox, it was an impostor. Great work!",
+    8: "Yeah, nobody is giving out free money. Great work dodging this lucrative scheme!"
 
 };  
 
@@ -25,7 +27,7 @@ export default function Woohoo(){
             Awesome!
         </div>
         <Image src={`/woohoo/thumbsup.png`} alt="level failed" width={350} height={200} />
-        <div className="text-lg"> {explanations[level!]}</div>
+        <div className="text-xl"> {explanations[level!]}</div>
         <button
               onClick={()=>router.push(`/user-levels/level-${Number(level!)+1}`)}
               type="button"

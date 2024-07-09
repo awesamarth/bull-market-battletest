@@ -6,6 +6,7 @@ import {CONTRACT_ADDRESS, abi} from "@/constants/"
 import { BaseError, parseEther } from "viem";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { callApi } from "@/app/utils/functions";
 
 export default function Airdrop() {
   const {address} = useAccount()
@@ -16,7 +17,8 @@ export default function Airdrop() {
 
     if(error){
       if((error as BaseError).shortMessage ="User rejected the request."){
-  
+        
+        callApi(address, 5)
         router.push("/woohoo?level=5")
       }
 

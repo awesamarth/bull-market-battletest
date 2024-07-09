@@ -1,4 +1,5 @@
 "use client";
+import { callApi } from "@/app/utils/functions";
 import Loader from "@/components/Loader";
 import { abi, CONTRACT_ADDRESS } from "@/constants";
 import { useRouter } from "next/navigation";
@@ -27,7 +28,7 @@ export default function LandingPage() {
 
     if(error){
       if((error as BaseError).shortMessage ="User rejected the request."){
-  
+        callApi(address, 6)
         router.push("/woohoo?level=6")
       }
 

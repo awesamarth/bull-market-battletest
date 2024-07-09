@@ -1,31 +1,52 @@
 "use client";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { bit } from "@/app/utils/utils";
 import { useRouter } from "next/navigation";
 import { useAccount } from "wagmi";
 import { callApi } from "@/app/utils/functions";
-
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@radix-ui/react-dropdown-menu";
+import Loader from "@/components/Loader";
+import Image from "next/image";
+import Link from "next/link";
 export default function Home() {
-
-  const [isLoading, setIsLoading] = useState(true)
-  const router = useRouter()
-  const {address} = useAccount()
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const { address } = useAccount();
   interface Message {
-    text: string;
+    text: string | ReactNode;
     sender: string | undefined;
   }
 
   interface Chat {
     id: string;
     name: string;
-    lastMessage: string;
+    lastMessage: string | ReactNode;
     profilePic: string;
   }
 
   const [messages, setMessages] = useState<Message[]>([
-    { sender: "borrower", text: "Yo bro kinda needed some ETH real quick" },
-    { sender: "borrower", text: "Could you please send me some?" },
-    {sender:"borrower", text:"I'll give it back to you ASAP"}
+    { sender: "richguy", text: "Help me manage my account please" },
+    {
+      sender: "richguy",
+      text: "It has 14470 USDT. You can have as much as you want",
+    },
+    {
+      sender: "richguy",
+      text: <div>
+        <div>username:richguyfr, Password: ujioh298, site:</div>
+        <Link href="/user-levels/level-8/exchange">
+        <Image src="/shartcoin.png" alt="link" className="py-2 px-1 object-cover h-48     w-full" height={200} width={200} />
+        </Link>
+        </div>,
+
+
+
+    },
   ]);
   const [selectedChat, setSelectedChat] = useState<string | null>("1");
 
@@ -33,75 +54,46 @@ export default function Home() {
   const [chats] = useState<Chat[]>([
     {
       id: "1",
-      name: "Borrower",
+      name: "Rich (@richguy.eth)",
       lastMessage: messages[messages.length - 1].text,
       profilePic: "/pfp.png",
     },
     {
       id: "2",
-      name: "My G",
-      lastMessage: "Aslam Chicken done scene",
+      name: "Protocol HR (@koilan_9)",
+      lastMessage: "We are currently not looking for...",
       profilePic: "/pfp.png",
     },
     {
       id: "3",
-      name: "Charlie",
-      lastMessage: "thanks!",
+      name: "Detector (@caughtya247)",
+      lastMessage: "Found 2 more catfish accounts 🤣",
       profilePic: "/pfp.png",
     },
     {
       id: "4",
-      name: "Ex",
-      lastMessage: "you deserve better",
+      name: "Shakespeare (@nichejoke)",
+      lastMessage: "An SSL error has occurred and...",
       profilePic: "/pfp.png",
     },
   ]);
 
-  const handleSendMessage = async(answer: string) => {
-    if(answer=="Sure"){
-      router.push("/pwned?level=2")
-    }
-    
-      setMessages([...messages, { text: answer, sender: "user" }]);
 
-      if(answer==="No!"&&messages.length>5){
-        await callApi(address, 2)
-        router.push("/woohoo?level=2")
-      }
 
-      if(answer==="Sure") return
-
-      setTimeout(() => {
-
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          {
-            text: "Please!",
-            sender: chats.find((chat) => chat.id === selectedChat)?.name,
-          },
-        ]);
-
-        if(messages.length>3){
-            setMessages((prevMessages) => [
-                ...prevMessages,
-                {
-                  text: "I promise I'll return it soon!",
-                  sender: chats.find((chat) => chat.id === selectedChat)?.name,
-                },
-              ]);
-        }
-      }, 1000);
-    
+  const blocked = async () => {
+    setIsLoading(true);
+    await callApi(address, 8);
+    router.push("/woohoo?level=8");
   };
 
   return (
-    <div className="flex h-screen pt-16 bg-gray-100">
+    <div className="flex h-screen   bg-gray-100 pt-16">
       {/* Sidebar */}
-      <div className="w-1/4 bg-white border-r">
-        <div className="p-4 h-16 bg-gray-200">
-          <h2 className="text-xl font-bold">Chats</h2>
+      <div className="w-1/4 bg-white  z-50 border-r ">
+        <div className="p-4 h-16 border-2 flex justify-between bg-gray-200">
+          <h2 className="text-xl font-bold">Xwitter Chats</h2>
         </div>
-        <div className="overflow-y-auto h-full">
+        <div className="overflow-y-auto ">
           {chats.map((chat) => (
             <div
               key={chat.id}
@@ -122,7 +114,9 @@ export default function Home() {
               <div>
                 <h3 className="font-semibold">{chat.name}</h3>
                 <p className="text-sm text-gray-600 truncate">
-                  {chat.lastMessage}
+                  {chat.id == "1"
+                    ? "username:richguyfr, password..."
+                    : chat.lastMessage}
                 </p>
               </div>
             </div>
@@ -132,12 +126,25 @@ export default function Home() {
 
       {/* Main chat area */}
       <div className=" z-50 flex-1 h-full flex flex-col">
-        <header className="bg-yellow-500 h- text-white h-16 p-4">
+        <header className="bg-yellow-500 flex items-center justify-between h- text-white h-16 p-4">
           <h1 className="text-2xl font-bold">
             {selectedChat
               ? chats.find((chat) => chat.id === selectedChat)?.name
               : ""}
           </h1>
+          <DropdownMenu>
+            <DropdownMenuTrigger className=" self-start  h-8 w-8 rounded-full border-yellow-500 focus:border-yellow-500 outline-none active:border-yellow-500 ">
+              {isLoading ? <Loader /> : "⋮"}
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="hover:cursor-pointer">
+              <DropdownMenuItem
+                className="hover:cursor-pointer bg-yellow-700 px-2 py-1 rounded-md"
+                onClick={blocked}
+              >
+                Block
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </header>
 
         <main className="flex-grow flex flex-col p-4 overflow-hidden">
@@ -162,26 +169,6 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="justify-center flex gap-5 w-full">
-            <button
-              onClick={()=>handleSendMessage("Sure")}
-              type="button"
-              className={
-                "bg-yellow-300 mt-3 px-6 rounded-md py-4 text-xs " +
-                bit.className
-              }
-            >Sure
-            </button>
-            <button
-              onClick={()=>handleSendMessage("No!")}
-              type="button"
-              className={
-                "bg-yellow-300 mt-3 px-6 rounded-md py-4 text-xs " +
-                bit.className
-              }
-            >No!
-            </button>
-          </div>
 
         </main>
       </div>

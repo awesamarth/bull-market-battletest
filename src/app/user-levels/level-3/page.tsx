@@ -31,7 +31,7 @@ export default function ExplorePage() {
         
         else{
           await callApi(address, 3)
-          router.push("/pwned") 
+          router.push("/pwned?level=3") 
         }
         
 

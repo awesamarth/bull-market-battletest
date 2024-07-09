@@ -31,7 +31,9 @@ export default function Pwned() {
     3: "Hint: not a very smart idea to carry your net worth around your neck.",
     4: "Made the rich richer with your money lmao bozo",
     5: "...and the phish heads straight towards the bait hook! Fret not, you'll get a refund of 0.5 ETH. Gas fee is forever gone though so cope lmao",
-    6: "Congrats genius. You just lost 90% of your ETH... is what I would have said had this not been a game. Since it is, you will be refunded (not gas tho)."
+    6: "Congrats genius. You just lost 90% of your ETH... is what I would have said had this not been a game. Since it is, you will be refunded (not gas tho).",
+    7:"Log off.",
+    8:`Ever heard the saying: 'There's no free lunch'?`
   };
 
 
