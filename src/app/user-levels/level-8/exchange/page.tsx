@@ -103,7 +103,7 @@ export default function Exchange() {
           </div>
           <button
         onClick={logout}
-        className="flex w-28 h-12  justify-center items-center absolute bottom-4 right-4 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+        className="flex w-20 h-8  justify-center items-center absolute bottom-4 right-4 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
       >
 
        {isLogoutLoading?<Loader />:"Logout"}  

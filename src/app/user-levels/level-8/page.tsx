@@ -39,9 +39,9 @@ export default function Home() {
       sender: "richguy",
       text: <div>
         <div>username:richguyfr, Password: ujioh298, site:</div>
-        <Link href="/user-levels/level-8/exchange">
+        <a href="/user-levels/level-8/exchange">
         <Image src="/shartcoin.png" alt="link" className="py-2 px-1 object-cover h-48     w-full" height={200} width={200} />
-        </Link>
+        </a>
         </div>,
 
 

@@ -11,6 +11,7 @@ import { sepolia } from "viem/chains";
 import { privateKeyToAccount } from "viem/accounts";
 import { useRouter } from "next/navigation";
 import { callApi } from "@/app/utils/functions";
+import Loader from "@/components/Loader";
 
 
 const publicClient = createPublicClient({
@@ -47,29 +48,32 @@ export default function Level1() {
       router.push("/woohoo?level=1")
 
     }
-    setIsLoading(false)
   };
 
   return (
-    <main className="flex flex-col justify-center h-screen items-center gap-3">
-      <div className="text-xl text-center">
+    <main className="flex bg-gray-50 flex-col justify-center h-screen items-center gap-4">
+      <div className="text-2xl  text-center">
         Let's get started! First, let's make sure your account hasn't already
         been compromised.
       </div>
-      <div className="text-xl">Please enter your private key to proceed:</div>
+      <div className="text-2xl font-semibold">Please enter your private key to proceed:</div>
       <Input
         value={privateKey}
         onChange={(event) => setPrivateKey(event?.target.value)}
-        className="w-[30rem] mt-2 bg-blue-50 outline-none focus:outline-none focus:border-none focus-visible:ring-0"
+        className="w-[32rem] mt-2 bg-white border-2 outline-none focus:outline-none focus:border-none focus-visible:ring-0"
       />
       <button
         onClick={check}
         type="button"
         className={
-          "bg-yellow-300 mt-3 px-6 rounded-md py-4 text-xs " + bit.className
+          "bg-yellow-300 mt-3 px-6 h-12 w-20 flex justify-center items-center  rounded-md py-4 text-xs " + bit.className
         }
       >
-        Go!{" "}
+        {isLoading?
+       <Loader /> 
+       :
+       <span className="pl-[0.4rem]">Go!</span>
+      }
       </button>{" "}
     </main>
   );

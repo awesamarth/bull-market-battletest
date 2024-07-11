@@ -1,10 +1,11 @@
 'use client'
 
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import { bit } from "@/app/utils/utils";
 import { useRouter } from "next/navigation";
 import { useAccount } from "wagmi";
 import { callApi } from "@/app/utils/functions";
+import Loader from "@/components/Loader";
 
 
 const products = [
@@ -20,8 +21,13 @@ export default function ExplorePage() {
 
     const router = useRouter()
     const {address} = useAccount()
+    const [selection, setSelection] = useState<Number | undefined>()
+    const [isLoading, setIsLoading] = useState(false)
 
     const answerCheck = async(id:Number)=>{
+
+        setSelection(id)
+        setIsLoading(true)
 
         if(id===3){
           router.push("/woohoo?level=3")
@@ -61,8 +67,12 @@ export default function ExplorePage() {
                     </div>
                   </div>
                   <div className="px-5 py-3 bg-gray-50">
-                    <button onClick={()=>answerCheck(product.id)} className="w-full text-white bg-red-500 hover:bg-red-700  font-bold py-2 px-4 rounded">
+                    <button onClick={()=>answerCheck(product.id)} className="w-full h-10 justify-center flex items-center  text-white bg-red-500 hover:bg-red-700  font-bold py-2 px-4 rounded">
+                      {product.id==selection&&isLoading?
+                      <Loader />
+                      :
                       <span className={bit.className + " text-xs"}>Remove from cart</span>
+                    }
                     </button>
                   </div>
                 </div>

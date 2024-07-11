@@ -1,5 +1,6 @@
 'use client'
 import Loader from "@/components/Loader";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import Link from "next/link";
@@ -63,10 +64,19 @@ export default function Email() {
         <div className="bg-gray-100  ml-[17rem] h-[35rem] flex flex-col rounded-md  w-[68rem] ">
           <div className="w-full h-10 px-4  pt-2 flex items-center justify-between ">
             <button className="rounded-full border h-7 w-7 flex justify-center  border-gray-500">←</button>
-            <button onClick={block} className="w-24 h-9 items-center flex justify-center border rounded-xl hover:bg-gray-200 border-gray-500 cursor:pointer">
-              {isLoading?<Loader />:"Block"}
-              
-              </button>
+            <DropdownMenu >
+            <DropdownMenuTrigger className=" self-start  h-8 w-8 rounded-full border-yellow-500 focus:border-yellow-500 outline-none active:border-yellow-500 ">
+              {isLoading ? <Loader /> : "⋮"}
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="hover:cursor-pointer">
+              <DropdownMenuItem
+                className="hover:cursor-pointer  px-2 py-1 rounded-md"
+                onClick={block}
+              >
+                Block
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
           </div>
 
           <div className="pl-5 pt-4 flex flex-col">
@@ -74,7 +84,7 @@ export default function Email() {
             <div className=" text-sm pl-1 pt-1">gknation <span className="text-gray-400">{" <gknation@aerdrop.io>"}</span></div>
             <div className="pl-1 mt-5 text-lg">Congratulations "address"! The wait is finaly over.  You are eligible for our highly antecipated airdrop! Follow the link below and claim what's yours! You may have received this mail in your spam folder but no worry, everything is all right</div>
             <Image className="self-center rounded-md mt-4 invert " src="/zksyncdrop.png" height={300} width={550} alt="zksync airdrop" />
-            <Link href="/user-levels/level-5/airdrop" className="pl-1 mt-2 self-center text-yellow-600">Claim here!</Link>
+            <a href="/user-levels/level-5/airdrop" className="pl-1 mt-2 self-center text-yellow-600">Claim here!</a>
           </div>
 
         </div>

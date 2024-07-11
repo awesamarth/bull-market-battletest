@@ -58,6 +58,7 @@ export default function Home() {
   ]);
 
   const handleSendMessage = async(answer: string) => {
+    setIsLoading(true)
     if(answer=="Sure"){
       router.push("/pwned?level=2")
     }
@@ -97,11 +98,11 @@ export default function Home() {
   return (
     <div className="flex h-screen pt-16 bg-gray-100">
       {/* Sidebar */}
-      <div className="w-1/4 bg-white border-r">
-        <div className="p-4 h-16 bg-gray-200">
-          <h2 className="text-xl font-bold">Chats</h2>
+      <div className="w-1/4 bg-white  z-50 border-r ">
+      <div className="p-4 h-16 border-2 flex justify-between bg-gray-200">
+      <h2 className="text-xl font-bold">Chats</h2>
         </div>
-        <div className="overflow-y-auto h-full">
+        <div className="overflow-y-auto">
           {chats.map((chat) => (
             <div
               key={chat.id}

@@ -22,7 +22,7 @@ export default function Home() {
   const { openConnectModal } = useConnectModal();
   const { address } = useAccount();
   const router = useRouter()
-  const [loading, setLoading] = useState(false)
+  const [isLoading, setisLoading] = useState(false)
   const [clicked, setClicked] = useState(false)
 
   useEffect(()=>{
@@ -33,7 +33,7 @@ export default function Home() {
   }, [address, clicked])
 
   const start = async()=>{
-    setLoading(true)
+    setisLoading(true)
     if (address&&clicked){
       console.log("start crow bosh");
       try {
@@ -57,7 +57,6 @@ export default function Home() {
 
       }
     };
-    setLoading(false)
   }
 
   const connectAndStart = async() => {
@@ -67,7 +66,7 @@ export default function Home() {
     setClicked((prev)=>!prev)
 
 
-    setLoading(true)
+    setisLoading(true)
 
      
     if (!address) {
@@ -100,7 +99,7 @@ export default function Home() {
 
       }
     };
-    setLoading(false)
+    setisLoading(false)
 
     }
   
@@ -109,7 +108,7 @@ export default function Home() {
       <div className=""></div>
       <div className=" flex flex-col gap-8 text-center">
         <div className={"text-6xl "+poppins.className}>Welcome to Bull Market Battletest</div>
-        <div className="text-2xl border-2 w-[50rem] self-center">
+        <div className="text-2xl  w-[50rem] self-center">
           Are you truly prepared for the bull run? Can you wade through <br />
           the mire of scams and keep your funds safe? Solve all riddles without compromising your account and prove your mettle!
         </div>
@@ -124,7 +123,7 @@ export default function Home() {
               }
             >
               {/*  */}
-              <div>{loading?(<Loader />):"Start"}</div>
+              <div>{isLoading?(<Loader />):"Start"}</div>
             </button>
          
         </div>

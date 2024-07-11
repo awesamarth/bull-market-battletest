@@ -5,12 +5,14 @@ import { useAccount, useWriteContract } from "wagmi";
 import {CONTRACT_ADDRESS, abi} from "@/constants/"
 import { BaseError, parseEther } from "viem";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { callApi } from "@/app/utils/functions";
+import Loader from "@/components/Loader";
 
 export default function Airdrop() {
   const {address} = useAccount()
   const {writeContractAsync, error, isSuccess} = useWriteContract() 
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
   useEffect(()=>{
@@ -33,6 +35,7 @@ export default function Airdrop() {
   }, [isSuccess])
 
   const sendTransaction = async()=>{
+    setIsLoading(true)
     try {
       await writeContractAsync({
         abi,
@@ -178,11 +181,14 @@ export default function Airdrop() {
         <button
         onClick={sendTransaction}
           className={
-            "bg-yellow-500 w-[30rem] z-[999999] h-10 px-4 py-2 rounded-3xl hover:bg-yellow-700 hover:cursor-pointer transition-all " +
+            "bg-yellow-500 flex justify-center items-center w-[30rem] z-[999999] h-10 px-4 py-2 rounded-3xl hover:bg-yellow-700 hover:cursor-pointer transition-all " +
             bit.className
           }
         >
-          Pay 0.5 ETH
+          {isLoading?<Loader />:
+          <span className="pl-[0.15rem]">Pay 0.5 ETH</span>
+          
+          }
         </button>
       </div>
     </div>

@@ -201,7 +201,7 @@ export default function TwitterLike() {
                 </div>
                 <p className="mb-4">{tweet.content}</p>
                 {tweet.thistheone && (
-                  <Link
+                  <a
                     href={"/user-levels/level-4/buy"}
                     className="justify-center items-center flex flex-col mb-4 cursor-pointer"
                   >
@@ -215,7 +215,7 @@ export default function TwitterLike() {
                     <div className="z-20 relative -mt-8 text-white bg-gray-800 bg-opacity-80 px-4 py-1 w-full rounded-b-md">
                       shartcoin.buy
                     </div>
-                  </Link>
+                  </a>
                 )}
                 <div className="flex justify-between text-gray-500">
                   <span>💬 {tweet.comments}</span>
