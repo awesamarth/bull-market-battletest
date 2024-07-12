@@ -58,6 +58,7 @@ export default function MetaMask() {
 
   return (
     <div className="w-[400px] h-[556px] relative z-[999999] overflow-hidden bg-[#24272a] px-4 pt-1  ">
+      <title>MetaMask</title>
       <div className="flex flex-col w-full items-center text-white gap-1">
         <Image src="/metamask.png" alt="MetaMask" height={150} width={150} />
         <div className={" font-semibold text-2xl " + poppins.className}>

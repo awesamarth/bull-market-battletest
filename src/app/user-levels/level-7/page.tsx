@@ -19,7 +19,7 @@ export default function MyComponent() {
     const popup = window.open(
       "/user-levels/level-7/metamask",
       "_blank",
-      "scrollbars=no,resizable=no,top=70,left=800,width=400,height=555 status=no titlebar=no"
+      "scrollbars=no,resizable=no,top=70,left=800,width=400,height=555 status=no location=no titlebar=no"
     );
     if (popup) {
       popupRef.current = popup;

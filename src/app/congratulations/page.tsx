@@ -96,7 +96,7 @@ export default function Congratulations() {
           <Image src="/github.svg" alt="github" height={30} width={30} />{" "}
         </Link>
         <Link
-          href="https://x.com/awesamarth"
+          href="https://x.com/awesamarth_"
           target="_blank"
           rel="noreferrer noopener"
         >
