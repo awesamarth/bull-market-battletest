@@ -1,4 +1,4 @@
-export const CONTRACT_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+export const CONTRACT_ADDRESS = "0x0B2bAf2427ab8eCBfE00AC0e007e566ac0E71529";
 export const WETH_ADDRESS = "0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9";
 export const abi = [
   { type: "fallback", stateMutability: "payable" },
