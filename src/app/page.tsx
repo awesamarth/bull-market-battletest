@@ -26,6 +26,8 @@ export default function Home() {
   const [clicked, setClicked] = useState(false)
 
   useEffect(()=>{
+    fetch('/api/warmup').catch(() => {});
+    
     if(address&&clicked){
       console.log("hua")
       start()
